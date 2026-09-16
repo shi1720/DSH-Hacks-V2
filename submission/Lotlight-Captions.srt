@@ -1,0 +1,163 @@
+1
+00:00:00,000 --> 00:00:04,060
+A medical recall reaches a clinic's inbox But who checks the
+
+2
+00:00:04,060 --> 00:00:07,060
+shelves Who follows up when a lot number is missing And
+
+3
+00:00:07,060 --> 00:00:10,020
+where is the evidence that someone finished the job This is
+
+4
+00:00:10,020 --> 00:00:13,920
+Lotlight a project by Shivam Gupta It connects the notice to
+
+5
+00:00:13,920 --> 00:00:19,260
+a documented response Meet Willow our fictional community clinic Its
+
+6
+00:00:19,260 --> 00:00:23,140
+spreadsheet has eight stock lines across four locations I can upload
+
+7
+00:00:23,140 --> 00:00:28,100
+a CSV validate every row and preserve missing identifiers instead of
+
+8
+00:00:28,100 --> 00:00:32,800
+quietly dropping them All the inventory you see is synthetic This
+
+9
+00:00:32,800 --> 00:00:36,880
+example uses two catalog and lot pairs from a real historical
+
+10
+00:00:36,880 --> 00:00:42,360
+Baxter manufacturer notice The original source stays one click away Each
+
+11
+00:00:42,360 --> 00:00:45,660
+pair has its own supporting excerpt so a lot from one
+
+12
+00:00:45,660 --> 00:00:49,800
+product cannot silently transfer to another Before anyone assigns a
+
+13
+00:00:49,800 --> 00:00:53,980
+response a person must check the source Here is where AI
+
+14
+00:00:53,980 --> 00:00:58,600
+helps Our stockroom calls this an IV line extender The notice
+
+15
+00:00:58,600 --> 00:01:02,160
+uses different wording A small language model compares those descriptions
+
+16
+00:01:02,160 --> 00:01:06,020
+directly in the browser without an API key It flags a
+
+17
+00:01:06,020 --> 00:01:09,660
+candidate for review It cannot invent a catalog number or declare
+
+18
+00:01:09,660 --> 00:01:14,100
+an item recalled For this line the manufacturer catalog and lot
+
+19
+00:01:14,100 --> 00:01:18,220
+agree Lotlight shows the reason and the source evidence A similar
+
+20
+00:01:18,220 --> 00:01:22,020
+product with a different identifier never becomes an exact match just
+
+21
+00:01:22,020 --> 00:01:26,420
+because the AI thinks its name looks close Now the review
+
+22
+00:01:26,420 --> 00:01:29,600
+becomes owned work I assign a coordinator and a due date
+
+23
+00:01:30,280 --> 00:01:33,400
+record the physical label check account for the units handled and
+
+24
+00:01:33,400 --> 00:01:38,440
+add a response reference These are clearly marked demonstration records In
+
+25
+00:01:38,440 --> 00:01:42,200
+practice the clinic must follow the full current manufacturer instructions
+
+26
+00:01:43,040 --> 00:01:46,720
+That response can now be recorded as complete But watch the
+
+27
+00:01:46,720 --> 00:01:51,400
+line with a missing lot Completion is disabled Someone still has
+
+28
+00:01:51,400 --> 00:01:55,880
+to find the label Partial quantities stay open too And correcting
+
+29
+00:01:55,880 --> 00:02:00,360
+one inventory line creates a new revision without reopening unrelated
+
+30
+00:02:00,980 --> 00:02:05,100
+unchanged work The result travels with the team Export the reviewed
+
+31
+00:02:05,100 --> 00:02:09,040
+inventory a readable report or the full source and activity record
+
+32
+00:02:09,700 --> 00:02:13,800
+Earlier source and inventory versions remain available This documents what
+
+33
+00:02:13,800 --> 00:02:17,540
+staff recorded It doesn't pretend to independently prove a device is
+
+34
+00:02:17,540 --> 00:02:22,120
+safe The first customer to test is an independent clinic still
+
+35
+00:02:22,120 --> 00:02:26,980
+doing this work in spreadsheets The pricing hypothesis is 149 per
+
+36
+00:02:26,980 --> 00:02:31,420
+site per month At an assumed 30 hourly staff cost 5
+
+37
+00:02:31,420 --> 00:02:35,800
+hours saved would cover it That needs a real pilot Lotlight
+
+38
+00:02:35,800 --> 00:02:39,520
+is a working MVP with tested safeguards and clear limits The
+
+39
+00:02:39,520 --> 00:02:43,240
+next step is supervised clinic validation because publishing a recall
+
+40
+00:02:43,240 --> 00:02:47,680
+starts the process A response someone can explain and finish closes
+
+41
+00:02:47,680 --> 00:02:48,660
+the operational gap

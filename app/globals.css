@@ -2017,3 +2017,10 @@ code {
 
 .orange-text{color:#ad5a32}.status-tag{color:#994a2d}.pill.exact{color:#944f2c}.pill.missing,.pill.possible{color:#806b24}
 .review-tabs [data-slot='tabs-trigger']{color:#58694b}
+
+.auth-form { display: grid; gap: 1rem; }
+.auth-form label { display: grid; gap: .45rem; font-size: .9rem; }
+.auth-form input { border: 1px solid #c8d1c2; border-radius: .5rem; padding: .8rem; background: white; font-size: 1rem; width: 100%; }
+.auth-links { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.auth-error { color: #913c24; font-size: .9rem; }
+.auth-form .btn-primary { padding: .8rem; border-radius: .5rem; background: #294430; color: white; }

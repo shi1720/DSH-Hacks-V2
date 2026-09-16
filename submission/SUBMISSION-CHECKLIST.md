@@ -1,27 +1,22 @@
-# Lotlight submission checklist
+# Lotlight submission status
 
-## Prepared
+## Ready
 
-- Interactive app and source in `shi1720/DSH-Hacks-V2`.
-- One-page project description PDF.
-- Source-code PDF in addition to GitHub.
-- Editable 7-slide pitch and PDF copy.
-- Verbatim narration and shot list.
-- Software validation, model boundaries, security limits, sources and commercial plan.
+- Public Firebase app: https://lotlight-care.web.app
+- Tested email accounts, private persistence and browser AI.
+- Narrated 2:49 demo with embedded captions, plus SRT captions and source narration.
+- One-page project description, authored source PDF, editable pitch and pitch PDF.
+- Complete Devpost story, technology list, testing instructions, YouTube title and description.
+- Source changes committed to the main branch at release.
 
-## Shivam's final steps
+## External publishing status
 
-1. Confirm you are 13+ and currently a member of an educational institution. This has not been verified and is required by the published rules.
-2. Review the product and the short script. Record your own voiceover, optionally a brief face-camera opening and closing. No impersonated voice is supplied.
-3. Review source code and claims, make any personal changes you want, and ensure attribution accurately describes your involvement.
-4. Upload the narrated video to a platform the judges can access. Keep private information out of the recording.
-5. Make the repository public or grant the judges access. The existing repository was private when inspected; visibility was preserved.
-6. Make the Site accessible to judges. The first publication is owner-private by default; private sign-in alone does not grant judges access. Open the exact final link in a signed-out/incognito browser to verify the chosen audience.
-7. Register and submit on https://dsh-hacks-v2.devpost.com/ using `DEVPOST.md`, the app/video/code links and `Lotlight-One-Page.pdf`. We have not accepted eligibility terms or submitted on your behalf.
-8. Recheck the official deadline and rules. Supplied deadline: **8 November 2026, 1:15 p.m. IST** (7 November, 11:45 p.m. PST). Allow a day for upload/access problems.
+The Devpost overview was saved as Lotlight with its elevator pitch. The story, media and remaining forms have not yet been saved. The demo has not yet been uploaded to YouTube. Browser control disconnected from the logged-in Chrome tabs and native screen capture failed, so these external actions require browser reconnection. Do not interpret the locally prepared fields as a submitted entry.
 
-## Honest claim boundaries
+## Eligibility
 
-The stock, clinic, owners and action references in the demonstration are synthetic. The Baxter notice is historical and its extract is incomplete by design. Counts in software tests are not clinical outcomes. $149/month, assumed labor cost and pilot goals are unvalidated business hypotheses. This is a functional MVP with production-oriented controls, not a certified or clinically validated production system.
+Shivam must ensure the student and age requirements apply. No school, age, team members, customer interviews or clinical experience were invented. User authorization to publish and accept the stated platform terms was provided, but eligibility facts remain unverified.
 
-No customer messages were sent, no paid subscriptions purchased, and no personal clinical experience or team membership was invented.
+## Claim boundaries
+
+The clinic, stock, staff actions and evidence references are synthetic. The Baxter notice is historical and only two selected scope pairs are demonstrated. Software test counts are not clinical outcomes. $149/month and labor-cost illustrations are commercial hypotheses. This is a functional, tested MVP with production-oriented controls, not a clinically validated production system.

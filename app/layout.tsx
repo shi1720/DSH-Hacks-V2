@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Lotlight — Recall to resolution",
+  title: "Lotlight |  Recall to resolution",
   description:
     "Evidence-backed medical recall review. Connect the notice to your inventory and document the response. A project by Shivam Gupta.",
   icons: {

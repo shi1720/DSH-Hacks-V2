@@ -1,0 +1,3 @@
+import fs from 'node:fs/promises';
+const form=new FormData();form.append('file',new Blob([await fs.readFile('submission/Lotlight-Narration.wav')],{type:'audio/wav'}),'narration.wav');form.append('model','whisper-1');form.append('response_format','verbose_json');form.append('timestamp_granularities[]','word');form.append('language','en');
+const r=await fetch('https://api.openai.com/v1/audio/transcriptions',{method:'POST',headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`},body:form});if(!r.ok)throw new Error(`Transcription failed: ${r.status}`);const data=await r.json();await fs.writeFile('.artifact-build/narration/alignment.json',JSON.stringify(data,null,2));console.log('Narration transcribed for synchronized captions');

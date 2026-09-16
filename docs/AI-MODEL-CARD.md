@@ -12,7 +12,7 @@ Only deterministic manufacturer/catalog/lot comparisons can yield an identifier 
 
 ## Data flow
 
-First use downloads public weights and runtime assets. Inventory descriptions remain on the device for inference. The app itself persists signed-in inventory/source records in D1. No claim that all app data stays on the device is made. The model has not been fine-tuned on clinic records.
+First use downloads public weights and runtime assets. Inventory descriptions remain on the device for inference. The app itself persists signed-in inventory/source records in Firestore. No claim that all app data stays on the device is made. The model has not been fine-tuned on clinic records.
 
 ## Evaluation
 

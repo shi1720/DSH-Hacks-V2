@@ -446,3 +446,54 @@ test("source history preserves original evidence after edits", () => {
   assert.equal(next.noticeHistory[0].text, current.notices[0].text);
   assert.equal(next.noticeHistory[0].approvedBy, "Test reviewer");
 });
+
+test("CSV rejects characters and repeated opening quotes after a closing quote", () => {
+  const header = "product,manufacturer,catalog,lot,quantity,location\n";
+  for (const value of [
+    '"IV line"x,Baxter,ABC,L1,1,Shelf',
+    '"IV line" "more",Baxter,ABC,L1,1,Shelf',
+  ])
+    assert.throws(() => parseCsv(header + value), /closing CSV quote/);
+});
+test("scope rejects an empty concrete lot list", () => {
+  const text = "Baxter\nCatalog: ABC; Lots: ,";
+  assert.equal(extractScope(text).length, 0);
+  assert.notEqual(
+    validateScope({
+      manufacturer: "Baxter",
+      text,
+      scope: [
+        {
+          catalog: "ABC",
+          lots: [],
+          allLots: false,
+          evidence: "Catalog: ABC; Lots: ,",
+        },
+      ],
+    }),
+    null,
+  );
+});
+test("inventory corrections cannot duplicate another record", () => {
+  const s = fixture(),
+    target = s.inventory[0],
+    source = s.inventory[1];
+  assert.throws(
+    () =>
+      reduceWorkspace(
+        s,
+        {
+          type: "correct_item",
+          id: target.id,
+          product: source.product,
+          manufacturer: source.manufacturer,
+          catalog: source.catalog,
+          lot: source.lot,
+          quantity: source.quantity,
+          location: source.location,
+        },
+        "Editor",
+      ),
+    /Duplicate inventory line/,
+  );
+});

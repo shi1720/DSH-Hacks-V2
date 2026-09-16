@@ -1,0 +1,7 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Clients use the authenticated, validated API. Direct database access is denied.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

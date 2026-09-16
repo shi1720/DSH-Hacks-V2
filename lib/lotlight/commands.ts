@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { parseCsv, validateScope, matchItem } from "./engine";
+import { parseCsv, validateScope, matchItem, inventoryKey } from "./engine";
 import { initialWorkspace } from "./sample";
 import type { Workspace, ResponseAction } from "./types";
 const short = z.string().trim().min(1).max(200);
@@ -154,6 +154,14 @@ export function reduceWorkspace(
   if (cmd.type === "correct_item") {
     const old = next.inventory.find((i) => i.id === cmd.id);
     if (!old) throw new Error("Inventory line not found.");
+    if (
+      next.inventory.some(
+        (i) => i.id !== cmd.id && inventoryKey(i) === inventoryKey(cmd),
+      )
+    )
+      throw new Error(
+        "Duplicate inventory line. Combine quantities before importing, or correct the existing record.",
+      );
     next.inventoryHistory.push({
       version: next.inventoryVersion,
       items: structuredClone(next.inventory),

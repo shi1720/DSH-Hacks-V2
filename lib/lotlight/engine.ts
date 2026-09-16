@@ -136,7 +136,11 @@ export function extractScope(text: string): Scope[] {
           .split(/[,;]/)
           .map((l) => l.trim())
           .filter(Boolean);
-    if (!allLots && lots.some((l) => !/^[A-Za-z0-9._/-]+$/.test(l))) continue;
+    if (
+      !allLots &&
+      (!lots.length || lots.some((l) => !/^[A-Za-z0-9._/-]+$/.test(l)))
+    )
+      continue;
     result.push({ catalog: m[1], lots, allLots, evidence: line.trim() });
   }
   return result;
@@ -173,25 +177,33 @@ export function parseCsv(text: string): InventoryItem[] {
   const rows: string[][] = [];
   let row: string[] = [],
     field = "",
-    quoted = false;
+    quoted = false,
+    closedQuote = false;
   const source = text.replace(/^\uFEFF/, "");
   for (let i = 0; i < source.length; i++) {
     const c = source[i];
+    if (closedQuote && c !== "," && c !== "\n" && c !== "\r")
+      throw new Error("Unexpected text after a closing CSV quote.");
     if (c === '"') {
       if (quoted && source[i + 1] === '"') {
         field += '"';
         i++;
-      } else if (quoted || field.length === 0) quoted = !quoted;
+      } else if (quoted) {
+        quoted = false;
+        closedQuote = true;
+      } else if (field.length === 0) quoted = true;
       else throw new Error("Invalid quote in CSV.");
     } else if (c === "," && !quoted) {
       row.push(field);
       field = "";
+      closedQuote = false;
     } else if ((c === "\n" || c === "\r") && !quoted) {
       if (c === "\r" && source[i + 1] === "\n") i++;
       row.push(field);
       if (row.some((v) => v.trim())) rows.push(row);
       row = [];
       field = "";
+      closedQuote = false;
     } else field += c;
   }
   if (quoted) throw new Error("CSV has an unclosed quoted field.");
@@ -236,15 +248,13 @@ export function parseCsv(text: string): InventoryItem[] {
       throw new Error(`Row ${i + 2}: product and location are required.`);
     if (values.some((v) => v.length > 500))
       throw new Error(`Row ${i + 2}: a field exceeds 500 characters.`);
-    const key = [
-      get("product"),
-      get("manufacturer"),
-      get("catalog"),
-      get("lot"),
-      get("location"),
-    ]
-      .map(identifier)
-      .join("|");
+    const key = inventoryKey({
+      product: get("product"),
+      manufacturer: get("manufacturer"),
+      catalog: get("catalog"),
+      lot: get("lot"),
+      location: get("location"),
+    });
     if (seen.has(key))
       throw new Error(
         `Row ${i + 2}: duplicate inventory line. Combine quantities before importing.`,
@@ -268,4 +278,21 @@ export function csvCell(value: unknown): string {
 }
 export function exportCsv(rows: unknown[][]): string {
   return "\uFEFF" + rows.map((r) => r.map(csvCell).join(",")).join("\r\n");
+}
+
+export function inventoryKey(
+  item: Pick<
+    InventoryItem,
+    "product" | "manufacturer" | "catalog" | "lot" | "location"
+  >,
+) {
+  return JSON.stringify(
+    [
+      item.product,
+      item.manufacturer,
+      item.catalog,
+      item.lot,
+      item.location,
+    ].map(identifier),
+  );
 }

@@ -14,7 +14,7 @@ Test $149/site/month after a supervised pilot. At an assumed $30/hour loaded lab
 
 ## Cheap delivery, honest costs
 
-AI inference runs in the browser, so no per-document paid AI API is needed. Model downloads and browser compute are real costs to the user. Hosting, storage, support, security work and onboarding are not free in a business. Platform free availability is not a long-term commercial entitlement. The hackathon uses provisioned Sites hosting and a D1 database without a separately supplied API key; paid production pricing must be checked with the chosen host.
+AI inference runs in the browser, so no per-document paid AI API is needed. Model downloads and browser compute are real costs to the user. Hosting, storage, support, security work and onboarding are not free in a business. Platform free availability is not a long-term commercial entitlement. The hackathon uses Firebase Hosting, Firebase Authentication and Firestore, plus a Cloud Run API with a one-instance cap and scale-to-zero. Free quotas may cover light testing, but storage, build artifacts, authentication and service usage can incur charges. Measure actual costs before a clinic pilot.
 
 Illustrative monthly contribution at $149: $10 infrastructure allocation + $30 support allocation leaves $109 before development, acquisition, compliance, taxes and overhead. Those numbers are assumptions, not measured costs. High-touch onboarding could eliminate margin.
 

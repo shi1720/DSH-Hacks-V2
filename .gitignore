@@ -50,3 +50,10 @@ next-env.d.ts
 /.artifact-build/
 
 /public/ai/
+
+/dist-firebase/
+/deploy-api/
+/firebase-debug.log
+/.firebase/
+
+/public/downloads/

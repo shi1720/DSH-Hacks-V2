@@ -3,7 +3,7 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {Presentation, PresentationFile} from '@oai/artifact-tool';
 
-const workspaceDir=process.env.PITCH_WORKSPACE || path.resolve('.artifact-build/pitch');
+const workspaceDir=process.env.PITCH_WORKSPACE || '/tmp/lotlight-final-pitch';
 const SKILL_DIR='/Users/shivamgupta/.codex/plugins/cache/openai-primary-runtime/presentations/26.905.11957/skills/presentations';
 const RUNTIME_PYTHON='/Users/shivamgupta/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3';
 const {resolvePresentationFont,finalizePresentation}=await import(pathToFileURL(path.join(SKILL_DIR,'container_tools/artifact_tool_utils.mjs')));
@@ -13,7 +13,7 @@ const C={paper:'#F8F9F5',forest:'#263329',lime:'#DDEC8B',orange:'#B55C36',muted:
 const source='https://www.medline.com/media/assets/pdf/vendor-list/FA-2025-039-Customer-Letter-Final-Combined.pdf';
 const ecri='https://home.ecri.org/blogs/ecri-blog/enhancing-recall-management-the-power-of-ecri-and-workday-integration';
 const screenshot=process.env.LOTLIGHT_SCREENSHOT || path.resolve('docs/images/workspace.png');
-const revision=process.env.PITCH_REVISION || 'v3';
+const revision=process.env.PITCH_REVISION || 'firebase-final';
 const textRecords=[];
 function txt(s,text,x,y,w,h,size=24,color=C.forest,bold=false){
  const a=s.shapes.add({geometry:'textbox',position:{left:x,top:y,width:w,height:h},fill:'none',line:{fill:'none',width:0}});
@@ -47,7 +47,7 @@ txt(s,'units with exact identifier pairs',68,333,345,67,25);
 txt(s,'14',65,423,300,89,80,C.forest,true);
 txt(s,'units need more identifier evidence',68,520,345,72,25);
 s.images.add({blob:new Uint8Array(await fs.readFile(screenshot)),contentType:'image/png',alt:'Lotlight working recall review application with synthetic Willow Clinic stock',fit:'contain',position:{left:440,top:214,width:774,height:402}});
-txt(s,'Willow demo: 8 inventory lines, 218 units, 4 locations. Two selected catalog–lot pairs only.',68,650,1140,28,17,C.muted);
+txt(s,'Willow demo: 8 inventory lines, 218 units, 4 locations. Two selected catalog-lot pairs only.',68,650,1140,28,17,C.muted);
 note(s,`The demo uses two catalog and lot pairs from Baxter’s 29 August 2025 notice. It is a training extract, not the full recall. In fictional Willow Clinic stock, two exact matches account for 36 units. Two other inventory lines account for 14 units and need more identifier evidence. Those rows stay visible for review. The full synthetic inventory contains eight lines and 218 units across four locations. These figures describe the fixture, not a measured real-world impact.\n\nManufacturer source: ${source}\nSelected pairs: 2C8632 / R25C31031 and 2R8858 / R25A13024. Product screenshot: implemented Lotlight application.`);
 }
 // 3. The boundary matters more than a model logo.
@@ -67,8 +67,8 @@ note(s,`The AI has a deliberately narrow job. A local MiniLM model compares prod
 const s=slide(4);title(s,'The review workflow');
 const rows=[['01','Bring the evidence','Import CSV and notice text. Transcribe PDF tables into checked labeled lines.'],['02','Review the matches','Inspect exact pairs and unresolved identifiers. Approve the source scope.'],['03','Record the response','Name the responsible person. Account for the full quantity with evidence.'],['04','Keep the record','Save under a signed-in account. Export JSON, CSV or a printable audit.']];
 rows.forEach((r,i)=>{const y=233+i*93;txt(s,r[0],65,y,78,52,36,C.orange,true);txt(s,r[1],161,y,1050,43,29,C.forest,true);txt(s,r[2],163,y+44,1030,40,22);});
-txt(s,'Immutable source and inventory snapshots preserve the inputs behind each response.',163,644,1025,30,20,C.muted);
-note(s,`Here is the demo path. First, load the sample or bring a stock CSV and the text of a notice. Text-based PDF and TXT imports are supported, but the parser intentionally accepts supported labeled lines. Staff must transcribe PDF tables into labeled catalog and lot lines and check them against the original. Next, review exact pair evidence and unresolved identifiers, then approve the source scope. Record a staff response with the responsible person, a full quantity and evidence. Finally, sign in to save the workspace and export the audit. Immutable source and inventory snapshots preserve the basis of each response. A correction to one inventory line retains other actions. This MVP does not offer shared team roles, live inventory integrations or automatic recall monitoring.\n\nSource: implemented Lotlight feature scope and completed browser workflow checks. PDF imports require extractable text. Scanned documents need a separate transcription step.`);
+txt(s,'Firebase Auth for sign-in. Cloud Run API with Firestore storage.\nImmutable source and inventory snapshots preserve each response’s inputs.',163,632,1025,57,19,C.muted);
+note(s,`Here is the demo path. First, load the sample or bring a stock CSV and the text of a notice. Text-based PDF and TXT imports are supported, but the parser intentionally accepts supported labeled lines. Staff must transcribe PDF tables into labeled catalog and lot lines and check them against the original. Next, review exact pair evidence and unresolved identifiers, then approve the source scope. Record a staff response with the responsible person, a full quantity and evidence. Finally, sign in with Firebase Authentication to save the workspace and export the audit. Firebase Hosting serves the public app, Cloud Run serves the API, and Firestore stores the account workspace. Immutable source and inventory snapshots preserve the basis of each response. A correction to one inventory line retains other actions. This MVP does not offer shared team roles, live inventory integrations or automatic recall monitoring.\n\nSource: implemented Lotlight feature scope and completed browser workflow checks. PDF imports require extractable text. Scanned documents need a separate transcription step.`);
 }
 // 5. Commercial hypotheses are visible, not hidden in speaker notes.
 {
@@ -85,14 +85,14 @@ note(s,`Our initial buyer hypothesis is an operations manager at a small clinic.
 // 6. An honest evidence slide is more useful than unsupported outcome claims.
 {
 const s=slide(6);title(s,'What we tested');
-txt(s,'33',65,218,480,107,92,C.forest,true);
-txt(s,'automated logic checks pass',68,339,500,50,28,C.forest,true);
-txt(s,'Browser checks pass for workflow, sign-in, persistence, exports and mobile use.',68,416,465,125,25);
+txt(s,'36',65,218,480,107,92,C.forest,true);
+txt(s,'automated unit tests pass',68,339,500,50,28,C.forest,true);
+txt(s,'10 public Firebase browser tests pass across workflow, sign-in, persistence, exports and mobile use.',68,416,465,125,25);
 txt(s,'12 synthetic descriptions',655,239,560,55,34,C.forest,true);
 txt(s,'6 relevant examples in a toy set.\nSemantic top 6 retrieved 5 of them.\nLexical matching found 4.',658,316,550,123,27);
 txt(s,'One plausible alias still missed.',658,468,540,43,24,C.orange,true);
 txt(s,'Hand-authored examples, with a threshold tuned after inspection. No accuracy or clinical validation claim.',68,582,1113,83,26,C.orange);
-note(s,`Thirty-three automated logic checks pass. Completed browser checks cover the review workflow, sign-in and persistence, exports and mobile use. We also ran real local AI inference on twelve hand-authored synthetic descriptions, with six relevant examples. The top six semantic results contained five of the relevant examples. Lexical matching found four. With a threshold of 0.3 chosen after inspecting this tiny set, the system surfaced five relevant candidates and no negative examples. It still missed one plausible alias. This is a smoke test and demonstration, not a held-out benchmark or a statistical accuracy claim. There are no real users or clinical validation yet. The next step is a supervised drill with clinic staff.\n\nSource: completed Lotlight automated test and browser smoke results supplied by the implementation team. Accessibility certification is not claimed. Dataset size: 12 synthetic descriptions, 6 relevant. Threshold tuning used the same examples. The result does not establish performance on real inventory.`);
+note(s,`Thirty-six automated unit tests pass. Ten public Firebase browser tests pass, covering the review workflow, sign-in and persistence, exports and mobile use. We also ran real local AI inference on twelve hand-authored synthetic descriptions, with six relevant examples. The top six semantic results contained five of the relevant examples. Lexical matching found four. With a threshold of 0.3 chosen after inspecting this tiny set, the system surfaced five relevant candidates and no negative examples. It still missed one plausible alias. This is a smoke test and demonstration, not a held-out benchmark or a statistical accuracy claim. There are no real users or clinical validation yet. The next step is a supervised drill with clinic staff.\n\nSource: completed Lotlight automated test and browser smoke results supplied by the implementation team. Accessibility certification is not claimed. Dataset size: 12 synthetic descriptions, 6 relevant. Threshold tuning used the same examples. The result does not establish performance on real inventory.`);
 }
 // 7. A focused ask and finish.
 {
@@ -100,9 +100,10 @@ const s=slide(7,true);
 txt(s,'The next proof belongs\nin a clinic.',64,105,1145,161,67,C.paper,true);
 txt(s,'A supervised recall drill',68,334,1100,63,42,C.lime,true);
 txt(s,'Recruit 3 pilot clinics. Compare review time and missed identifiers.\nAsk whether the evidence record is useful enough to pay for.',68,419,1090,110,29,C.paper);
-txt(s,'Lotlight',65,587,650,76,60,C.lime,true);
+txt(s,'lotlight-care.web.app',68,589,704,53,38,C.lime,true);
+txt(s,'169-second AI-narrated demo with captions',68,650,700,28,20,'#D7DFD0');
 txt(s,'Shivam Gupta\nAI-assisted research and development',807,602,410,58,20,'#D7DFD0');
-note(s,`Lotlight is ready for its next honest test: a supervised recall drill with clinic staff. I want to recruit three pilot clinics, compare review time and missed identifiers with their existing process, and learn whether the evidence record is useful enough to pay for. The goal is simple: help a small healthcare team turn a notice into a documented response. I’m Shivam Gupta. Thank you.\n\nThe pilot is proposed and no clinic recruitment is claimed. Creator: Shivam Gupta, with AI-assisted research and development. This is an operational decision-support MVP, not clinical decision software or a certified compliance system.`);
+note(s,`Lotlight is ready for its next honest test: a supervised recall drill with clinic staff. I want to recruit three pilot clinics, compare review time and missed identifiers with their existing process, and learn whether the evidence record is useful enough to pay for. The goal is simple: help a small healthcare team turn a notice into a documented response. Try the public app at https://lotlight-care.web.app. The submission includes a 169-second AI-narrated demonstration with captions. I’m Shivam Gupta. Thank you.\n\nThe pilot is proposed and no clinic recruitment is claimed. Creator: Shivam Gupta, with AI-assisted research and development. This is an operational decision-support MVP, not clinical decision software or a certified compliance system.`);
 }
 
 await fs.mkdir(path.join(workspaceDir,'build','renders-'+revision),{recursive:true});

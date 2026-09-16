@@ -134,7 +134,20 @@ const date = (s: string) =>
     year: "numeric",
     timeZone: "UTC",
   });
-export default function Lotlight({ user }: { user: UserInfo }) {
+type WorkspaceRequest = (
+  input: string,
+  init?: RequestInit,
+) => Promise<Response>;
+const defaultRequest: WorkspaceRequest = (input, init) => fetch(input, init);
+export default function Lotlight({
+  user,
+  request = defaultRequest,
+  onAuth,
+}: {
+  user: UserInfo;
+  request?: WorkspaceRequest;
+  onAuth?: () => void;
+}) {
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
     setHydrated(true);
@@ -144,6 +157,7 @@ export default function Lotlight({ user }: { user: UserInfo }) {
   const [state, setState] = useState<Workspace>(initialWorkspace);
   const [view, setView] = useState<View>("overview");
   const [loading, setLoading] = useState(!!user);
+  const [hasLoaded, setHasLoaded] = useState(!user);
   const [busy, setBusy] = useState(false);
   const busyRef = useRef(false);
   const [saveError, setSaveError] = useState("");
@@ -182,10 +196,11 @@ export default function Lotlight({ user }: { user: UserInfo }) {
     if (!user) return;
     setLoading(true);
     try {
-      const res = await fetch("/api/workspace", { cache: "no-store" });
+      const res = await request("/api/workspace", { cache: "no-store" });
       const data = (await res.json()) as Workspace & { error: string };
       if (!res.ok) throw new Error(data.error);
       setState(data);
+      setHasLoaded(true);
       setSaveError("");
     } catch (error) {
       setSaveError(
@@ -194,7 +209,7 @@ export default function Lotlight({ user }: { user: UserInfo }) {
     } finally {
       setLoading(false);
     }
-  }, [user]);
+  }, [user, request]);
   useEffect(() => {
     void load();
   }, [load]);
@@ -215,7 +230,7 @@ export default function Lotlight({ user }: { user: UserInfo }) {
       if (user) {
         if (saveError)
           throw new Error("Reload your saved workspace before making changes.");
-        const res = await fetch("/api/workspace", {
+        const res = await request("/api/workspace", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ revision: state.revision, command }),
@@ -457,10 +472,20 @@ export default function Lotlight({ user }: { user: UserInfo }) {
             </span>
             <a
               className="top-account"
+              onClick={
+                onAuth
+                  ? (e) => {
+                      e.preventDefault();
+                      onAuth();
+                    }
+                  : undefined
+              }
               href={
-                user
-                  ? "/signout-with-chatgpt?return_to=%2F"
-                  : "/signin-with-chatgpt?return_to=%2F"
+                onAuth
+                  ? "#account"
+                  : user
+                    ? "/signout-with-chatgpt?return_to=%2F"
+                    : "/signin-with-chatgpt?return_to=%2F"
               }
               title={
                 user ? user.email : "Demo changes will not transfer on sign-in"
@@ -481,7 +506,16 @@ export default function Lotlight({ user }: { user: UserInfo }) {
               </button>
             </div>
           )}
-          {loading ? (
+          {user && !loading && !hasLoaded ? (
+            <div className="loading-state">
+              <AlertTriangle />
+              <h1>Your saved workspace could not open</h1>
+              <p>
+                Retry using the button above. Your account records have not been
+                replaced.
+              </p>
+            </div>
+          ) : loading ? (
             <div className="loading-state">
               <Loader2 className="spin" />
               <h1>Opening your workspace</h1>
@@ -2039,9 +2073,9 @@ function ActionDialog({
             <div className="info-banner">
               <AlertTriangle size={16} />
               <span>
-                Collect missing identifiers, then replace the inventory with
-                corrected records. This uncertain line cannot be marked
-                complete.
+                Collect missing identifiers, then use the Correct button in
+                Inventory to update the affected line. This uncertain line
+                cannot be marked complete.
               </span>
             </div>
           )}

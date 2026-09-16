@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-16T12:29:24.746Z",
+  "date": "2026-09-16T13:12:48.715Z",
   "model": "Xenova/all-MiniLM-L6-v2",
   "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
   "dtype": "q8",
@@ -7,7 +7,7 @@
   "query": "Baxter CLEARLINK IV extension and solution sets",
   "total": 12,
   "relevant": 6,
-  "elapsedIncludingModelLoadMs": 418,
+  "elapsedIncludingModelLoadMs": 7732,
   "lexicalRecall": 0.6666666666666666,
   "semanticTop6Recall": 0.8333333333333334,
   "candidateThreshold": 0.3,

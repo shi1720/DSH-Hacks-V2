@@ -41,19 +41,19 @@ y-=20
 para(c,'VALIDATION & LIMITS',left,y,W-84,8.5,12,muted,True)
 y=para(c,'Automated tests cover scope pairing, missing identifiers, workflow gates, import validation and version changes. Browser tests exercise sign-in, persistence, response completion and exports. This is a hackathon MVP, not clinically validated or approved for unsupervised clinical use. Shared team roles, OCR and complex recall scope remain future work.',left,y-20,W-84,9,13)
 c.setStrokeColor(HexColor('#dce2d4'));c.line(42,88,W-42,88)
-para(c,'CODE  <link href="https://github.com/shi1720/DSH-Hacks-V2" color="#455d37">github.com/shi1720/DSH-Hacks-V2</link>',42,75,W-84,8.5,12)
+para(c,'APP  <link href="https://lotlight-care.web.app" color="#455d37">lotlight-care.web.app</link>    CODE  <link href="https://github.com/shi1720/DSH-Hacks-V2" color="#455d37">github.com/shi1720/DSH-Hacks-V2</link>',42,75,W-84,8.5,12)
 para(c,'SOURCES  Baxter FA-2025-039 (Medline-hosted manufacturer PDF); FDA, What is a Medical Device Recall? Full source links and limitations are in the repository.',42,57,W-84,7.5,10,muted)
 para(c,'Project creator: Shivam Gupta. AI-assisted research, implementation, testing and presentation preparation.',42,30,W-84,7,9,muted)
 c.save()
 # Authored code listing; vendor libraries and lockfiles remain in the repository.
 files=[]
-for prefix in ['app','lib/lotlight','db','tests']:
+for prefix in ['app','lib/lotlight','db','tests','server','firebase']:
  for p in (ROOT/prefix).rglob('*'):
-  if p.suffix in ['.ts','.tsx','.css','.mjs'] and p.is_file():files.append(p)
-for name in ['scripts/build-ai.mjs','scripts/evaluate-ai.mjs','scripts/create-submission-pdfs.py','playwright.config.ts','vite.config.ts','package.json','drizzle/0000_real_hellcat.sql']:
+  if p.suffix in ['.ts','.tsx','.css','.mjs','.html'] and p.is_file():files.append(p)
+for name in ['scripts/build-ai.mjs','scripts/evaluate-ai.mjs','scripts/create-submission-pdfs.py','playwright.config.ts','vite.config.ts','package.json','firebase.json','.firebaserc','firestore.rules','vite.firebase.config.ts','drizzle/0000_real_hellcat.sql']:
  p=ROOT/name
  if p.exists():files.append(p)
-files += [p for p in (ROOT/'scripts').glob('*') if p.suffix in ['.mjs','.py']]
+files += [p for p in (ROOT/'scripts').glob('*') if p.suffix in ['.mjs','.py','.sh']]
 files += list((ROOT/'.github').rglob('*.yml'))
 files=sorted(set(files))
 c=canvas.Canvas(str(OUT/'Lotlight-Source-Code.pdf'),pagesize=A4);c.setTitle('Lotlight | Authored source listing');c.setAuthor('Shivam Gupta');page=0

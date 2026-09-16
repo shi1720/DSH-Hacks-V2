@@ -129,6 +129,10 @@ test("local sign-in, account persistence, stale revision and origin rejection", 
   page,
   request,
 }) => {
+  test.skip(
+    process.env.LOTLIGHT_FIREBASE === "1",
+    "Sites-only development auth test",
+  );
   await ready(page);
   expect((await request.get("/api/workspace")).status()).toBe(401);
   await page.getByRole("link", { name: "Sign in to save" }).click();
@@ -136,7 +140,9 @@ test("local sign-in, account persistence, stale revision and origin rejection", 
     page.getByText("Account storage", { exact: true }),
   ).toBeVisible();
   const reset = await page.evaluate(async () => {
-    const s = await (await fetch("/api/workspace")).json() as {revision:number};
+    const s = (await (await fetch("/api/workspace")).json()) as {
+      revision: number;
+    };
     const r = await fetch("/api/workspace", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -160,7 +166,9 @@ test("local sign-in, account persistence, stale revision and origin rejection", 
     page.getByText("SOURCE REVIEWED", { exact: true }),
   ).toBeVisible();
   const status = await page.evaluate(async () => {
-    const s = await (await fetch("/api/workspace")).json() as {revision:number};
+    const s = (await (await fetch("/api/workspace")).json()) as {
+      revision: number;
+    };
     const r = await fetch("/api/workspace", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -237,6 +245,16 @@ test("WebMCP read tool handles valid and invalid input without mutation", async 
   expect(result.rejected).toBe(true);
 });
 
-test('text-based PDF notice import preserves text and extracts explicit pairs',async({page})=>{
- await ready(page);await page.getByRole('button',{name:'New recall review'}).click();await page.getByLabel('Upload recall notice').setInputFiles('public/samples/baxter-training-extract.pdf');await expect(page.getByLabel('Original notice text / clearly labeled training extract')).toContainText('R25C31031');await expect(page.getByLabel('Catalog',{exact:true})).toHaveCount(2);
+test("text-based PDF notice import preserves text and extracts explicit pairs", async ({
+  page,
+}) => {
+  await ready(page);
+  await page.getByRole("button", { name: "New recall review" }).click();
+  await page
+    .getByLabel("Upload recall notice")
+    .setInputFiles("public/samples/baxter-training-extract.pdf");
+  await expect(
+    page.getByLabel("Original notice text / clearly labeled training extract"),
+  ).toContainText("R25C31031");
+  await expect(page.getByLabel("Catalog", { exact: true })).toHaveCount(2);
 });

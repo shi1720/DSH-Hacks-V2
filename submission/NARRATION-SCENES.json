@@ -1,0 +1,82 @@
+[
+  {
+    "start": 0,
+    "end": 19,
+    "text": "A medical recall reaches a clinic's inbox. But who checks the shelves? Who follows up when a lot number is missing? And where is the evidence that someone finished the job? This is Lotlight, a project by Shivam Gupta. It connects the notice to a documented response.",
+    "narrationSeconds": 15.312,
+    "finalStart": 0,
+    "finalEnd": 15.812
+  },
+  {
+    "start": 19,
+    "end": 39,
+    "text": "Meet Willow, our fictional community clinic. Its spreadsheet has eight stock lines across four locations. I can upload a CSV, validate every row, and preserve missing identifiers instead of quietly dropping them. All the inventory you see is synthetic.",
+    "narrationSeconds": 16.2,
+    "finalStart": 15.812,
+    "finalEnd": 32.512
+  },
+  {
+    "start": 39,
+    "end": 61,
+    "text": "This example uses two catalog-and-lot pairs from a real, historical Baxter manufacturer notice. The original source stays one click away. Each pair has its own supporting excerpt, so a lot from one product cannot silently transfer to another. Before anyone assigns a response, a person must check the source.",
+    "narrationSeconds": 19.704,
+    "finalStart": 32.512,
+    "finalEnd": 52.716
+  },
+  {
+    "start": 61,
+    "end": 79,
+    "text": "Here is where AI helps. Our stockroom calls this an IV line extender. The notice uses different wording. A small language model compares those descriptions directly in the browser, without an API key. It flags a candidate for review. It cannot invent a catalog number or declare an item recalled.",
+    "narrationSeconds": 17.904,
+    "finalStart": 52.716,
+    "finalEnd": 71.12
+  },
+  {
+    "start": 79,
+    "end": 92,
+    "text": "For this line, the manufacturer, catalog, and lot agree. Lotlight shows the reason and the source evidence. A similar product with a different identifier never becomes an exact match just because the AI thinks its name looks close.",
+    "narrationSeconds": 13.416,
+    "finalStart": 71.12,
+    "finalEnd": 85.036
+  },
+  {
+    "start": 92,
+    "end": 113,
+    "text": "Now the review becomes owned work. I assign a coordinator and a due date, record the physical-label check, account for the units handled, and add a response reference. These are clearly marked demonstration records. In practice, the clinic must follow the full current manufacturer instructions.",
+    "narrationSeconds": 17.4,
+    "finalStart": 85.036,
+    "finalEnd": 102.936
+  },
+  {
+    "start": 113,
+    "end": 137,
+    "text": "That response can now be recorded as complete. But watch the line with a missing lot: completion is disabled. Someone still has to find the label. Partial quantities stay open too. And correcting one inventory line creates a new revision without reopening unrelated, unchanged work.",
+    "narrationSeconds": 18.504,
+    "finalStart": 102.936,
+    "finalEnd": 121.94000000000001
+  },
+  {
+    "start": 137,
+    "end": 156,
+    "text": "The result travels with the team. Export the reviewed inventory, a readable report, or the full source and activity record. Earlier source and inventory versions remain available. This documents what staff recorded; it doesn't pretend to independently prove a device is safe.",
+    "narrationSeconds": 16.104,
+    "finalStart": 121.94000000000001,
+    "finalEnd": 138.544
+  },
+  {
+    "start": 156,
+    "end": 174,
+    "text": "The first customer to test is an independent clinic still doing this work in spreadsheets. The pricing hypothesis is a hundred and forty-nine dollars per site per month. At an assumed thirty-dollar hourly staff cost, five hours saved would cover it. That needs a real pilot.",
+    "narrationSeconds": 16.32,
+    "finalStart": 138.544,
+    "finalEnd": 155.364
+  },
+  {
+    "start": 174,
+    "end": 185,
+    "text": "Lotlight is a working MVP with tested safeguards and clear limits. The next step is supervised clinic validation. Because publishing a recall starts the process. A response someone can explain and finish closes the operational gap.",
+    "narrationSeconds": 13.464,
+    "finalStart": 155.364,
+    "finalEnd": 169.328
+  }
+]
