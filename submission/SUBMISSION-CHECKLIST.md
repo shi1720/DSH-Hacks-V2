@@ -11,7 +11,10 @@
 
 ## External publishing status
 
-The Devpost overview was saved as Lotlight with its elevator pitch. The story, media and remaining forms have not yet been saved. The demo has not yet been uploaded to YouTube. Browser control disconnected from the logged-in Chrome tabs and native screen capture failed, so these external actions require browser reconnection. Do not interpret the locally prepared fields as a submitted entry.
+- YouTube: published publicly at https://youtu.be/Gp8QAwelyXI with the final title, description, AI disclosure, embedded captions and English subtitle track. Platform copyright and Community Guidelines checks reported no issues.
+- GitHub: public repository, main branch release, automated CI passed.
+- Devpost: Lotlight name, pitch, full story, app/code/resource links, video link and 12.9 MB submission package saved. All five offered prize categories selected. Branded thumbnail and two product screenshots uploaded.
+- Final submission: not yet confirmed. The last verified submission status was DRAFT, 4/5 steps done. Browser access disconnected again during the final gallery edit. Reopen the finalization page and verify the official terms checkbox and Submit project action. Do not interpret this prepared draft as a confirmed entry.
 
 ## Eligibility
 

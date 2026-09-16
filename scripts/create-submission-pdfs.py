@@ -50,7 +50,7 @@ files=[]
 for prefix in ['app','lib/lotlight','db','tests','server','firebase']:
  for p in (ROOT/prefix).rglob('*'):
   if p.suffix in ['.ts','.tsx','.css','.mjs','.html'] and p.is_file():files.append(p)
-for name in ['scripts/build-ai.mjs','scripts/evaluate-ai.mjs','scripts/create-submission-pdfs.py','playwright.config.ts','vite.config.ts','package.json','firebase.json','.firebaserc','firestore.rules','vite.firebase.config.ts','drizzle/0000_real_hellcat.sql']:
+for name in ['scripts/build-ai.mjs','scripts/evaluate-ai.mjs','scripts/create-submission-pdfs.py','playwright.config.ts','vite.config.ts','package.json','firebase.json','public/judges/index.html','.firebaserc','firestore.rules','vite.firebase.config.ts','drizzle/0000_real_hellcat.sql']:
  p=ROOT/name
  if p.exists():files.append(p)
 files += [p for p in (ROOT/'scripts').glob('*') if p.suffix in ['.mjs','.py','.sh']]

@@ -1,7 +1,7 @@
 import type { Workspace, Notice } from "./types";
 export const BAXTER_URL =
   "https://www.medline.com/media/assets/pdf/vendor-list/FA-2025-039-Customer-Letter-Final-Combined.pdf";
-export const SAMPLE_NOTICE_TEXT = `TRAINING EXTRACT — paraphrased from Baxter manufacturer notice FA-2025-039, dated 2025-08-29. This is a historical demonstration, not a current safety notice. Consult the full original notice for every affected product and instruction. Only two catalog/lot pairs are included here.
+export const SAMPLE_NOTICE_TEXT = `TRAINING EXTRACT: paraphrased from Baxter manufacturer notice FA-2025-039, dated 2025-08-29. This is a historical demonstration, not a current safety notice. Consult the full original notice for every affected product and instruction. Only two catalog/lot pairs are included here.
 Manufacturer: Baxter
 Product: CLEARLINK IV extension and solution sets
 Catalog: 2C8632; Lots: R25C31031

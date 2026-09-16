@@ -33,3 +33,5 @@ Remaining release limits are in `SECURITY.md`. No clinic pilot, measured time sa
 The Firebase migration review also caught malformed quoted CSV suffixes, duplicate stock created by correction, empty parsed lot lists, initial account-load failure states, and configuration bootstrap failure. Regression checks cover these cases.
 
 Final dependency audit: `npm audit` reports zero known vulnerabilities after compatible runtime updates and targeted transitive overrides. TypeScript, Firebase/API builds and the legacy build passed. The deployed API rejects a deleted account's previously issued token; configuration-outage recovery is browser-tested.
+
+GitHub CI passed on release commit `6adc5ba`: clean `npm ci`, TypeScript, unit checks, Firebase/API/legacy builds and legacy browser regressions. Public judge-resource checks returned HTTP 200 for every linked download, parsed the 169.328-second video and confirmed no horizontal overflow at 390 px.
