@@ -1,0 +1,61 @@
+{
+  "durationSeconds": 185,
+  "markers": [
+    {
+      "seconds": 0,
+      "name": "A notice is only the beginning"
+    },
+    {
+      "seconds": 19,
+      "name": "Bring the inventory"
+    },
+    {
+      "seconds": 31,
+      "name": "Validate and import"
+    },
+    {
+      "seconds": 39,
+      "name": "Review the original source"
+    },
+    {
+      "seconds": 53,
+      "name": "Human source approval"
+    },
+    {
+      "seconds": 61,
+      "name": "AI finds an alias"
+    },
+    {
+      "seconds": 79,
+      "name": "Exact identifiers and rationale"
+    },
+    {
+      "seconds": 92,
+      "name": "Record a response"
+    },
+    {
+      "seconds": 113,
+      "name": "Documented completion"
+    },
+    {
+      "seconds": 121,
+      "name": "Missing evidence stays open"
+    },
+    {
+      "seconds": 137,
+      "name": "Portable audit trail"
+    },
+    {
+      "seconds": 146,
+      "name": "Printable record"
+    },
+    {
+      "seconds": 156,
+      "name": "Business hypothesis and boundaries"
+    },
+    {
+      "seconds": 174,
+      "name": "Lotlight closing"
+    }
+  ]
+}

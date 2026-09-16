@@ -1,0 +1,33 @@
+name: Lotlight checks
+on:
+  push:
+  pull_request:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Initialize isolated test database
+        run: node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_real_hellcat.sql
+      - name: Browser workflows
+        run: |
+          npm run dev -- --port 5173 > /tmp/lotlight-dev.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl --fail http://localhost:5173/ > /dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          LOTLIGHT_TEST_URL=http://localhost:5173 npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-failure-details
+          path: test-results/

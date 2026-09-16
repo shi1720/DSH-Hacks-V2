@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+const url=process.env.LOTLIGHT_BUILT_URL??'http://127.0.0.1:5185';
+const suffix=crypto.randomUUID();const a='lotlight-test-a-'+suffix,b='lotlight-test-b-'+suffix;
+const headers=user=>({'oai-authenticated-user-id':user,'oai-authenticated-user-email':user+'@example.invalid','Content-Type':'application/json',Origin:url});
+const get=async u=>(await fetch(url+'/api/workspace',{headers:headers(u)})).json();
+const post=async(u,s,command)=>fetch(url+'/api/workspace',{method:'POST',headers:headers(u),body:JSON.stringify({revision:s.revision,command})});
+assert.equal((await fetch(url+'/api/workspace')).status,401);
+let sa=await get(a),sb=await get(b);assert.equal(sa.revision,0);assert.equal(sb.revision,0);
+const source={title:'Isolation test',manufacturer:'Test Supplies',date:'2026-09-16',sourceUrl:'https://example.org/notice',text:'Test Supplies\nCatalog: TEST; Lots: LOT1',scope:[{catalog:'TEST',lots:['LOT1'],allLots:false,evidence:'Catalog: TEST; Lots: LOT1'}],action:'Synthetic source response used only for database isolation testing.',training:true};
+assert.equal((await post(a,sa,{type:'save_notice',notice:source})).status,200);sa=await get(a);const created=sa.notices.find(n=>n.title==='Isolation test');assert.ok(created);sb=await get(b);assert.equal(sb.notices.length,1);assert.equal(sb.revision,0);
+assert.equal((await post(b,sb,{type:'approve_notice',noticeId:created.id,sourceConfirmed:true})).status,400);
+assert.equal((await post(a,{revision:0},{type:'reset_demo'})).status,409);
+assert.equal((await fetch(url+'/api/workspace',{method:'POST',headers:{...headers(a),Origin:'https://evil.invalid'},body:JSON.stringify({revision:sa.revision,command:{type:'reset_demo'}})})).status,403);
+assert.equal((await post(a,sa,{type:'approve_notice',noticeId:created.id,sourceConfirmed:true,approvedBy:'Forged actor'})).status,400);
+await post(a,sa,{type:'clear_workspace'});await post(b,sb,{type:'clear_workspace'});
+const result={date:new Date().toISOString(),checks:7,status:'passed',environment:'Built Worker on loopback with test-only trusted gateway headers',checksRun:['anonymous denied','separate account initialization','account A mutation invisible to B','cross-account notice mutation denied','stale revision denied','foreign origin denied','forged actor denied'],limitation:'Checks application tenant isolation. Does not validate the external Sites header-stripping boundary or full OAuth flow.'};await fs.writeFile('docs/api-isolation-results.json',JSON.stringify(result,null,2)+'\n');console.log(result);

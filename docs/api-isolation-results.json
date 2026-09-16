@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-16T12:32:57.754Z",
+  "checks": 7,
+  "status": "passed",
+  "environment": "Built Worker on loopback with test-only trusted gateway headers",
+  "checksRun": [
+    "anonymous denied",
+    "separate account initialization",
+    "account A mutation invisible to B",
+    "cross-account notice mutation denied",
+    "stale revision denied",
+    "foreign origin denied",
+    "forged actor denied"
+  ],
+  "limitation": "Checks application tenant isolation. Does not validate the external Sites header-stripping boundary or full OAuth flow."
+}

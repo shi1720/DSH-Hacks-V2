@@ -1,0 +1,103 @@
+{
+  "date": "2026-09-16T12:29:24.746Z",
+  "model": "Xenova/all-MiniLM-L6-v2",
+  "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+  "dtype": "q8",
+  "runtime": "actual Chromium browser / WASM",
+  "query": "Baxter CLEARLINK IV extension and solution sets",
+  "total": 12,
+  "relevant": 6,
+  "elapsedIncludingModelLoadMs": 418,
+  "lexicalRecall": 0.6666666666666666,
+  "semanticTop6Recall": 0.8333333333333334,
+  "candidateThreshold": 0.3,
+  "thresholdRelevant": 5,
+  "thresholdFalseCandidates": 0,
+  "limitations": "Hand-authored synthetic smoke/ranking set, one query. Not clinical validation or an unbiased held-out benchmark. Labels and threshold not independently adjudicated.",
+  "ranked": [
+    {
+      "id": "literal-2",
+      "product": "CLEARLINK solution set",
+      "relevant": true,
+      "similarity": 0.6032500173585517,
+      "lexical": true
+    },
+    {
+      "id": "literal-1",
+      "product": "CLEARLINK extension set",
+      "relevant": true,
+      "similarity": 0.526555551460866,
+      "lexical": true
+    },
+    {
+      "id": "alias-4",
+      "product": "IV solution administration set",
+      "relevant": true,
+      "similarity": 0.5112745254943328,
+      "lexical": true
+    },
+    {
+      "id": "alias-1",
+      "product": "IV line extender",
+      "relevant": true,
+      "similarity": 0.36659555443597125,
+      "lexical": false
+    },
+    {
+      "id": "alias-3",
+      "product": "Extension tubing for infusion line",
+      "relevant": true,
+      "similarity": 0.3316133254163688,
+      "lexical": true
+    },
+    {
+      "id": "negative-2",
+      "product": "Sterile gauze dressing",
+      "relevant": false,
+      "similarity": 0.20806457272363327,
+      "lexical": false
+    },
+    {
+      "id": "alias-2",
+      "product": "Intravenous fluid administration tubing",
+      "relevant": true,
+      "similarity": 0.13737267280896262,
+      "lexical": false
+    },
+    {
+      "id": "negative-6",
+      "product": "Urine collection cup",
+      "relevant": false,
+      "similarity": 0.07616860269184256,
+      "lexical": false
+    },
+    {
+      "id": "negative-4",
+      "product": "Wheelchair footrest",
+      "relevant": false,
+      "similarity": 0.07402128072140181,
+      "lexical": false
+    },
+    {
+      "id": "negative-5",
+      "product": "Blood glucose test strips",
+      "relevant": false,
+      "similarity": 0.07186261561586939,
+      "lexical": false
+    },
+    {
+      "id": "negative-1",
+      "product": "Examination gloves",
+      "relevant": false,
+      "similarity": 0.06296322940127097,
+      "lexical": false
+    },
+    {
+      "id": "negative-3",
+      "product": "Digital thermometer",
+      "relevant": false,
+      "similarity": 0.045285861203130315,
+      "lexical": false
+    }
+  ]
+}

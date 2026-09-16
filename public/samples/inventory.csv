@@ -1,0 +1,9 @@
+product,manufacturer,catalog,lot,quantity,location
+CLEARLINK extension set,Baxter,2C8632,R25C31031,24,Infusion room
+CLEARLINK solution set,Baxter,2R8858,R25A13024,12,Main stockroom
+CLEARLINK extension set,Baxter,2C8632,,8,Procedure room
+IV line extender,Baxter,,,6,Mobile cart
+CLEARLINK extension set,Baxter,2C8632,R24Z99999,18,Main stockroom
+CLEARLINK solution set,Baxter,2R8858,R24Z88888,10,Infusion room
+Sterile gauze,Demo Supply Co,GAUZE-4,G202601,40,Procedure room
+Examination gloves,Demo Supply Co,GLV-M,G202602,100,Main stockroom
