@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -138,6 +138,9 @@ type WorkspaceRequest = (
   input: string,
   init?: RequestInit,
 ) => Promise<Response>;
+const subscribeHydration = () => () => {};
+const clientHydration = () => true;
+const serverHydration = () => false;
 const defaultRequest: WorkspaceRequest = (input, init) => fetch(input, init);
 export default function Lotlight({
   user,
@@ -148,10 +151,9 @@ export default function Lotlight({
   request?: WorkspaceRequest;
   onAuth?: () => void;
 }) {
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
+  const hydrated = useSyncExternalStore(
+    subscribeHydration, clientHydration, serverHydration,
+  );
   const [noticeNonce, setNoticeNonce] = useState(0);
   const [correcting, setCorrecting] = useState<InventoryItem | null>(null);
   const [state, setState] = useState<Workspace>(initialWorkspace);
@@ -211,9 +213,13 @@ export default function Lotlight({
     }
   }, [user, request]);
   useEffect(() => {
+    // Synchronize the authenticated workspace and its loading indicator.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void load();
   }, [load]);
   useEffect(() => {
+    // Invalidate output together with the external worker when its inputs change.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setScores({});
     setAiStatus("idle");
     worker.current?.terminate();
@@ -1985,7 +1991,7 @@ function ActionDialog({
   onSave: (c: Command) => Promise<void>;
 }) {
   const [owner, setOwner] = useState(action?.owner ?? "");
-  const [due, setDue] = useState(
+  const [due, setDue] = useState(() =>
     action?.dueDate ??
       new Date(Date.now() + 86400000).toISOString().slice(0, 10),
   );

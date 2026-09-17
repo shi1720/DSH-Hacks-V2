@@ -5,6 +5,12 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  {
+    // Lotlight also renders through Firebase's standalone Vite client.
+    // This home link intentionally reloads the document and local demo state.
+    files: ["app/lotlight.tsx"],
+    rules: { "@next/next/no-html-link-for-pages": "off" },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
@@ -12,6 +18,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated browser bundle and copied ONNX runtime; source is linted in lib/.
+    "public/ai/**",
   ]),
   {
     files: ["components/ui/**/*.{ts,tsx}", "hooks/use-mobile.ts"],
