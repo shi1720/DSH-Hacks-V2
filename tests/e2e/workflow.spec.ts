@@ -1,3 +1,10 @@
+type CapturedTool = {
+  name: string;
+  execute(input: unknown): { inventoryLines: number };
+};
+declare global {
+  interface Window { capturedTools: CapturedTool[]; }
+}
 import { test, expect } from "@playwright/test";
 import { SAMPLE_CSV } from "../../lib/lotlight/sample";
 async function ready(page: import("@playwright/test").Page) {
@@ -219,18 +226,19 @@ test("WebMCP read tool handles valid and invalid input without mutation", async 
   page,
 }) => {
   await page.addInitScript(() => {
-    (window as any).capturedTools = [];
+    window.capturedTools = [];
     Object.defineProperty(document, "modelContext", {
       value: {
-        registerTool(tool: any) {
-          (window as any).capturedTools.push(tool);
+        registerTool(tool: CapturedTool) {
+          window.capturedTools.push(tool);
         },
       },
     });
   });
   await ready(page);
   const result = await page.evaluate(() => {
-    const tool = (window as any).capturedTools.at(-1);
+    const tool = window.capturedTools.at(-1);
+    if (!tool) throw new Error("The review tool was not registered");
     const good = tool.execute({});
     let rejected = false;
     try {

@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import type { Workspace } from "../../lib/lotlight/types";
 import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
 const config = JSON.parse(
@@ -21,10 +22,10 @@ async function identity(method: string, body: unknown) {
       body: JSON.stringify(body),
     },
   );
-  return { status: r.status, data: (await r.json()) as any };
+  return { status: r.status, data: (await r.json()) as { idToken: string } };
 }
 test("Firebase API isolates accounts and enforces workflow, origin and revision gates", async () => {
-  const accounts: any[] = [];
+  const accounts: { idToken: string }[] = [];
   async function account() {
     const r = await identity("signUp", {
       email: `lotlight-qa-${randomUUID()}@example.invalid`,
@@ -52,7 +53,7 @@ test("Firebase API isolates accounts and enforces workflow, origin and revision 
       b = await account();
     const ar = await api(a);
     expect(ar.status).toBe(200);
-    const s = (await ar.json()) as any;
+    const s = (await ar.json()) as Workspace;
     const br = await api(b);
     expect(br.status).toBe(200);
     const cmd = {
@@ -68,7 +69,7 @@ test("Firebase API isolates accounts and enforces workflow, origin and revision 
     const approved = await api(a, cmd);
     expect(approved.status).toBe(200);
     expect((await api(a, cmd)).status).toBe(409);
-    const bs = (await (await api(b)).json()) as any;
+    const bs = (await (await api(b)).json()) as Workspace;
     expect(bs.notices[0].approvedAt).toBeNull();
     expect(
       (
